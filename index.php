@@ -9,6 +9,12 @@ require_once './functions.php';
 <?php
 $pageName = "index";
 require_once './layout/head.php';
+
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+
 ?>
 
 <body class="animsition">
@@ -18,26 +24,17 @@ require_once './layout/head.php';
 
 
 
-
-    <?php require_once './layout/cartsidebar.php'; ?>
-
-
     <!-- Slider -->
     <section class="section-slide">
         <div class="wrap-slick1 rs1-slick1">
             <div class="slick1">
-                <div class="item-slick1" style="background-image: url(images/slide-03.jpg);">
+                <div class="item-slick1" style="background-image: url(./images/icons/gym.png);">
                     <div class="container h-full">
                         <div class="flex-col-l-m h-full p-t-100 p-b-30">
-                            <div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
-                                <span class="ltext-202 cl2 respon2">
-                                    Men Collection 2018
-                                </span>
-                            </div>
 
                             <div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
-                                <h2 class="ltext-104 cl2 p-t-19 p-b-43 respon1">
-                                    New arrivals
+                                <h2 class="ltext-104 cl2 p-t-19 p-b-43 respon1" style="color:white">
+                                    Equipment Planet
                                 </h2>
                             </div>
 
@@ -50,18 +47,13 @@ require_once './layout/head.php';
                     </div>
                 </div>
 
-                <div class="item-slick1" style="background-image: url(images/slide-02.jpg);">
+                <div class="item-slick1" style="background-image: url(images/icons/main2.jpg);">
                     <div class="container h-full">
                         <div class="flex-col-l-m h-full p-t-100 p-b-30">
-                            <div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
-                                <span class="ltext-202 cl2 respon2">
-                                    Men New-Season
-                                </span>
-                            </div>
 
                             <div class="layer-slick1 animated visible-false" data-appear="lightSpeedIn" data-delay="800">
-                                <h2 class="ltext-104 cl2 p-t-19 p-b-43 respon1">
-                                    Jackets & Coats
+                                <h2 class="ltext-104 cl2 p-t-19 p-b-43 respon1" style="color:white">
+                                    Strong Target
                                 </h2>
                             </div>
 
@@ -74,18 +66,13 @@ require_once './layout/head.php';
                     </div>
                 </div>
 
-                <div class="item-slick1" style="background-image: url(images/slide-04.jpg);">
+                <div class="item-slick1" style="background-image: url(images/icons/a4.png);">
                     <div class="container h-full">
                         <div class="flex-col-l-m h-full p-t-100 p-b-30">
-                            <div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">
-                                <span class="ltext-202 cl2 respon2">
-                                    Women Collection 2018
-                                </span>
-                            </div>
 
                             <div class="layer-slick1 animated visible-false" data-appear="rotateInUpRight" data-delay="800">
-                                <h2 class="ltext-104 cl2 p-t-19 p-b-43 respon1">
-                                    NEW SEASON
+                                <h2 class="ltext-104 cl2 p-t-19 p-b-43 respon1" style="color:white">
+                                    NEW Collection
                                 </h2>
                             </div>
 
@@ -124,10 +111,6 @@ require_once './layout/head.php';
                             <div class="block1-txt-child1 flex-col-l">
                                 <span class="block1-name ltext-102 trans-04 p-b-8">
                                     <?= $category['name'] ?>
-                                </span>
-
-                                <span class="block1-info stext-102 trans-04">
-                                    Spring 2018
                                 </span>
                             </div>
 
@@ -205,10 +188,7 @@ require_once './layout/head.php';
                                         </div>
 
                                         <div class="block2-txt-child2 flex-r p-t-3">
-                                            <!-- <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                                <img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
-                                                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
-                                            </a> -->
+
                                             new
                                         </div>
                                     </div>
@@ -281,13 +261,6 @@ require_once './layout/head.php';
                                                 <?php else : ?>
                                                     <span><?php echo $SaleProduct['price'] ?> JOD</span>
                                                 <?php endif; ?>
-                                            </div>
-
-                                            <div class="block2-txt-child2 flex-r p-t-3">
-                                                <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                                    <img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
-                                                    <img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
-                                                </a>
                                             </div>
                                         </div>
                                     </div>

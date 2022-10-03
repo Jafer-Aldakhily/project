@@ -147,7 +147,7 @@ function add_category() {
     }
 
 
-    function Count_number_of_completed_orders () {
+    function Count_number_of_pending_orders () {
         global $conn ;
 
     $sql = ("SELECT * FROM orders WHERE status= 'pending'");
@@ -160,7 +160,7 @@ function add_category() {
 }
 
 
-function Count_number_of_Pending_orders () {
+function Count_number_of_completed_orders () {
     global $conn ;
 
 $sql = ("SELECT * FROM orders WHERE status= 'completed'");
@@ -171,3 +171,116 @@ if ($result = mysqli_query($conn, $sql)) {
     echo $rowcount  ;    
 }
 }
+
+function Count_number_of_rejected_orders () {
+    global $conn ;
+
+$sql = ("SELECT * FROM orders WHERE status= 'rejected'");
+if ($result = mysqli_query($conn, $sql)) {
+
+    // Return the number of rows in result set
+    $rowcount = mysqli_num_rows( $result );  
+    echo $rowcount  ;    
+}
+}
+
+function Count_number_of_in_delviery_orders () {
+    global $conn ;
+
+$sql = ("SELECT * FROM orders WHERE status= 'in_delviery'");
+if ($result = mysqli_query($conn, $sql)) {
+
+    // Return the number of rows in result set
+    $rowcount = mysqli_num_rows( $result );  
+    echo $rowcount  ;    
+}
+}
+
+function Count_number_of_pick_up_orders () {
+    global $conn ;
+
+$sql = ("SELECT * FROM orders WHERE status= 'pick_up'");
+if ($result = mysqli_query($conn, $sql)) {
+
+    // Return the number of rows in result set
+    $rowcount = mysqli_num_rows( $result );  
+    echo $rowcount  ;    
+}
+}
+
+function sum_all_orders () {
+    global $conn ;
+
+    $sql = ("SELECT sum(total_price) from bill");
+    if ($result = mysqli_query($conn, $sql)) {
+
+    $row = mysqli_fetch_array($result);
+    
+    echo $row[0].'JOD';
+    
+}
+}
+
+
+function sum_lastmonth_orders () {
+    global $conn ;
+    
+
+    $sql = ("SELECT date(date_ordered),sum(total_price) 
+    from bill  WHERE date_ordered > now() - INTERVAL 1 month ");
+    if ($result = mysqli_query($conn, $sql)) {
+
+    $row = mysqli_fetch_array($result);
+    
+    echo $row[1].'JOD';
+    
+}
+}
+
+function sum_annual_orders () {
+    global $conn ;
+    
+
+    $sql = ("SELECT date(date_ordered),sum(total_price) 
+    from bill  WHERE date_ordered > now() - INTERVAL 12 month ");
+    if ($result = mysqli_query($conn, $sql)) {
+
+    $row = mysqli_fetch_array($result);
+    
+    echo $row[1].'JOD';
+    
+}
+}
+
+function sum_today_orders () {
+    global $conn ;
+    $year = date("Y");
+    $month = date("m");
+    $day = date("d");
+
+
+
+    $sql = ("SELECT sum(total_price) 
+    from bill  WHERE day(date_ordered) =$day &&  month(date_ordered) =$month &&  year(date_ordered) =$year");
+    if ($result = mysqli_query($conn, $sql)) {
+
+    $row = mysqli_fetch_array($result);
+    
+    echo $row[0].'JOD';
+    }
+}
+
+function avg_annual_orders () {
+    global $conn ;
+    
+
+    $sql = ("SELECT avg(total_price) from bill ");
+    if ($result = mysqli_query($conn, $sql)) {
+
+    $row = mysqli_fetch_array($result);
+    
+    echo $row[0].'JOD';
+    
+}
+}
+

@@ -21,8 +21,6 @@ require_once './functions.php';
     <?php require_once './layout/header.php'; ?>
 
 
-    <?php require_once './layout/cartsidebar.php'; ?>
-
 
     <!-- breadcrumb -->
     <div class="container">

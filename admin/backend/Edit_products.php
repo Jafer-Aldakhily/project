@@ -21,7 +21,27 @@ if(isset($_POST ['update'])){
     $category_id    = ($_POST['category_id']);
     $description    = ($_POST['description']);
     $discount        = ($_POST['discount']);
-    $image = ($_FILES['file']['name']);
+    $image= $_FILES['file']['name'];
+$image_temp_location = ($_FILES['file']['tmp_name']);
+$folder = 'img/';
+$target = "img/".basename($image);
+
+if(empty($image)) {
+
+$get_image = ("SELECT image FROM products WHERE id = '$id'");
+$result = mysqli_query($conn, $get_image);
+
+while($pic = mysqli_fetch_array($result)) {
+
+$image = $pic['image'];
+
+    }
+
+}
+
+
+move_uploaded_file($image_temp_location , $folder.$image);
+
     $sql = " UPDATE `products` SET `name` = '$name', `price` = '$price' , `category_id` = '$category_id' , `description` = '$description', `discount` = '$discount',`image` = '$image'
      WHERE `products`.`id` = $id ";
     $result = mysqli_query($conn, $sql);

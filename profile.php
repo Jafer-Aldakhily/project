@@ -13,7 +13,6 @@ require_once './functions.php';
 <body class="animsition">
 
     <?php require_once './layout/header.php'; ?>
-    <?php require_once './layout/cartsidebar.php'; ?>
 
 
 

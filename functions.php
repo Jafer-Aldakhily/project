@@ -31,6 +31,15 @@ function getOneByEmail($table, $email)
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+function subscriber($table, $email)
+{
+    global $conn;
+    $sql = "SELECT * FROM $table WHERE email= :email";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([":email" => $email]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 // getDataByForeignKey
 function getDataByForeignKey($table, $foreignKey)
 {
@@ -116,6 +125,42 @@ function getRowsNumber($table, $condition = [])
         $sql = "select count(*) from $table where " . $key[0] . " = :" . $key[0];
         $query = $conn->prepare($sql);
         $query->execute([":" . $key[0] => $condition["$key[0]"]]);
+        $result = $query->fetch();
+        return $result[0];
+    } else {
+        global $conn;
+        $sql = "select count(*) from $table";
+        $query = $conn->prepare($sql);
+        $query->execute();
+        $result = $query->fetch();
+        return $result[0];
+    }
+}
+
+
+// getReviews
+function getReviews($table, $table2, $foreignKey)
+{
+    global $conn;
+    $sql = "SELECT * FROM $table 
+    INNER JOIN $table2 
+    ON $table.user_id = $table2.id 
+    WHERE $table.product_id = $foreignKey";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+
+// Check if user purchased the product 
+function getRowsNumberOrders($table, $condition = [])
+{
+    $key = array_keys($condition);
+    if ($condition) {
+        global $conn;
+        $sql = "select count(*) from $table where " . $key[0] . " = :" . $key[0] . " " . "and" . " " . $key[1] . " = :" . $key[1];
+        $query = $conn->prepare($sql);
+        $query->execute([":" . $key[0] => $condition["$key[0]"], ":" . $key[1] => $condition["$key[1]"]]);
         $result = $query->fetch();
         return $result[0];
     } else {

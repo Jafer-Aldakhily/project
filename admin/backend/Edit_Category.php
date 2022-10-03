@@ -10,12 +10,31 @@ $image = $row['image'];
 
 if(isset($_POST ['update'])){
     $name = $_POST['name'];
-    $image = ($_FILES['file']['name']);
-
+    $image= $_FILES['file']['name'];
+    $image_temp_location = ($_FILES['file']['tmp_name']);
+    $folder = 'img/';
+    $target = "img/".basename($image);
+    
+    if(empty($image)) {
+    
+    $get_image = ("SELECT image FROM products WHERE id = '$id'");
+    $result = mysqli_query($conn, $get_image);
+    
+    while($pic = mysqli_fetch_array($result)) {
+    
+    $image = $pic['image'];
+    
+        }
+    
+    }
+    
+    
+    move_uploaded_file($image_temp_location , $folder.$image);
+    
     $sql = " UPDATE `categories` SET `Name` = '$name', `image` = '$image'  WHERE `categories`.`id` = $id ";
     $result = mysqli_query($conn, $sql);
     if($result){
-        header("location:../AddCategories.php");
+        echo ("<script>location.href='AddCategories.php'</script>");
     }else{
         echo "Data not inserted";
     }

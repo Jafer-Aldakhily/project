@@ -1,5 +1,7 @@
 <?php
-
+if (!isset($_SESSION)) {
+    session_start();
+}
 require_once './config.php';
 
 if (isset($_POST['submit'])) {
@@ -20,7 +22,6 @@ if (isset($_POST['submit'])) {
             }
         }
     }
-
 
     header("location: cart.php");
 }

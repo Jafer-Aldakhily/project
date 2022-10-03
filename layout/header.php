@@ -6,6 +6,8 @@ if (!isset($_SESSION)) {
     require_once './functions.php';
 }
 
+$_SESSION['current_page'] = $_SERVER['REQUEST_URI'];
+
 
 
 
@@ -22,7 +24,7 @@ if (!isset($_SESSION)) {
 
                 <!-- Logo desktop -->
                 <a href="#" class="logo">
-                    <img src="images/icons/logo-01.png" alt="IMG-LOGO">
+                    <img src="./images/icons/1morelogo.png" alt="IMG-LOGO">
                 </a>
 
                 <!-- Menu desktop -->
@@ -60,7 +62,7 @@ if (!isset($_SESSION)) {
                 <div class="wrap-icon-header flex-w flex-r-m h-full">
 
                     <div class="flex-c-m h-full p-r-24">
-                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 js-show-modal-search">
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11">
                             <?php if (isset($_SESSION["email"])) : ?>
 
                                 <ul class="main-menu">
@@ -93,12 +95,16 @@ if (!isset($_SESSION)) {
                             $user_id = $activeUser['id'];
                             $rows = getRowsNumber("cart", ["user_id" => $user_id]) ?? "";
                         ?>
-                            <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="<?= $rows ?>">
-                                <i class="zmdi zmdi-shopping-cart"></i>
+                            <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti" data-notify="<?= $rows ?>">
+                                <a href="./cart.php" style="color:black">
+                                    <i class="zmdi zmdi-shopping-cart"></i>
+                                </a>
                             </div>
                         <?php else : ?>
-                            <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="0">
-                                <i class="zmdi zmdi-shopping-cart"></i>
+                            <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti" data-notify="0">
+                                <a href="./registration.php" style="color:black">
+                                    <i class="zmdi zmdi-shopping-cart"></i>
+                                </a>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -117,17 +123,55 @@ if (!isset($_SESSION)) {
 
         <!-- Icon header -->
         <div class="wrap-icon-header flex-w flex-r-m h-full m-r-15">
-            <div class="flex-c-m h-full p-r-10">
-                <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 js-show-modal-search">
-                    <i class="zmdi zmdi-search"></i>
+
+            <div class="flex-c-m h-full p-r-24">
+                <div class="icon-header-item-m cl2 hov-cl1 trans-04 p-lr-11">
+                    <?php if (isset($_SESSION["email"])) : ?>
+
+                        <ul class="main-menu">
+                            <li>
+                                <a href="./profile.php">MyAccount</a>
+                                <ul class="sub-menu">
+                                    <li><a href="./profile.php">Profile</a></li>
+                                    <li><a href="./register/includes/logout.inc.php">Logout</a></li>
+                                </ul>
+                                <span class="arrow-main-menu-m">
+                                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                </span>
+                            </li>
+                        </ul>
+                    <?php else : ?>
+                        <ul class="main-menu">
+                            <li>
+                                <a href="registration.php">Register \ Login</a>
+                            </li>
+                        </ul>
+                    <?php endif; ?>
+
                 </div>
             </div>
 
+
             <div class="flex-c-m h-full p-lr-10 bor5">
-                <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="2">
-                    <i class="zmdi zmdi-shopping-cart"></i>
-                </div>
+                <?php if (isset($_SESSION["email"])) :
+                    $activeUser = getOneByEmail('users', $_SESSION["email"]);
+                    $user_id = $activeUser['id'];
+                    $rows = getRowsNumber("cart", ["user_id" => $user_id]) ?? "";
+                ?>
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti" data-notify="<?= $rows ?>">
+                        <a href="./cart.php">
+                            <i class="zmdi zmdi-shopping-cart"></i>
+                        </a>
+                    </div>
+                <?php else : ?>
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti" data-notify="0">
+                        <a href="./registration.php">
+                            <i class="zmdi zmdi-shopping-cart"></i>
+                        </a>
+                    </div>
+                <?php endif; ?>
             </div>
+
         </div>
 
         <!-- Button show menu -->
@@ -143,52 +187,12 @@ if (!isset($_SESSION)) {
     <div class="menu-mobile">
         <ul class="main-menu-m">
             <li>
-                <a href="index.html">Home</a>
-                <ul class="sub-menu-m">
-                    <li><a href="index.html">Homepage 1</a></li>
-                    <li><a href="home-02.html">Homepage 2</a></li>
-                    <li><a href="home-03.html">Homepage 3</a></li>
-                </ul>
-                <span class="arrow-main-menu-m">
-                    <i class="fa fa-angle-right" aria-hidden="true"></i>
-                </span>
+                <a href="index.php">Home</a>
             </li>
-
             <li>
-                <a href="product.html">Shop</a>
-            </li>
-
-            <li>
-                <a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
-            </li>
-
-            <li>
-                <a href="blog.html">Blog</a>
-            </li>
-
-            <li>
-                <a href="about.html">About</a>
-            </li>
-
-            <li>
-                <a href="contact.html">Contact</a>
+                <a href="product.php">Shop</a>
             </li>
         </ul>
     </div>
 
-    <!-- Modal Search -->
-    <!-- <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
-        <div class="container-search-header">
-            <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-                <img src="images/icons/icon-close2.png" alt="CLOSE">
-            </button>
-
-            <form class="wrap-search-header flex-w p-l-15">
-                <button class="flex-c-m trans-04">
-                    <i class="zmdi zmdi-search"></i>
-                </button>
-                <input class="plh3" type="text" name="search" placeholder="Search...">
-            </form>
-        </div>
-    </div> -->
 </header>

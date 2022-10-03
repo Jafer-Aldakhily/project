@@ -1,29 +1,45 @@
-<?php include_once "../Admin/layout/head.php" ?>
-<?php include_once "../Admin/layout/footer.php" ?>
-<?php include_once "../Admin/layout/header.php" ?>
-<?php include_once "../Admin/layout/sidebar.php" ?>
+
+                
+                <?php 
+
+include "layout\head.php";
+include "layout\header.php"
 
 
 
+?>
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                <?php
+require_once "backend/connection.php";
+require_once "backend/functions.php";
+
+?>
+
+<div class="container-fluid px-4">
+                        <h1 class="mt-1">Edit Product </h1>
+                        <ol class="breadcrumb mb-4">
+                        </ol>
+</div>
 
 
-
-
-    
-
-            <div id="layoutSidenav_content">
-                <main>
-                   
-
-                                <?php 
+<?php 
 
 include "./backend/Edit_Category.php"
 
 ?>
+                    <!-- Page Heading -->
+
+                </div>
+                <!-- /.container-fluid -->
+
+            <!-- End of Main Content -->
+
+            <?php 
+
+include "layout/footer.php"
 
 
-</div>
-                            </div>
-                            
-                </main>
-                
+
+?>

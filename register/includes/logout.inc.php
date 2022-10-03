@@ -5,4 +5,4 @@ session_unset();
 session_destroy();
 
 
-echo "<script>window.location = 'http://localhost/project/'</script>";
+echo "<script>window.location = 'http://localhost/phptestproject/'</script>";

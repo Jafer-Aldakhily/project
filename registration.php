@@ -16,7 +16,6 @@ require_once './layout/head.php';
 <body>
 
     <?php require_once './layout/header.php';
-    require_once './layout/cartsidebar.php';
     ?>
 
 
